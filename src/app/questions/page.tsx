@@ -8,6 +8,7 @@ import { Input } from '@/components/ui/input'
 import { Search, MessageSquare, Eye, Calendar, User, ArrowUp, ArrowDown } from 'lucide-react'
 
 import { useEffect, useState } from 'react'
+import { useSearchParams } from 'next/navigation'
 
 export default function QuestionsPage() {
   const [questions, setQuestions] = useState<any[]>([])
@@ -15,6 +16,9 @@ export default function QuestionsPage() {
   const [stats, setStats] = useState({ questions: 0, answers: 0, users: 0 })
   const [statsLoading, setStatsLoading] = useState(true)
   const [statsError, setStatsError] = useState('')
+  const searchParams = useSearchParams();
+  const initialQuery = searchParams.get('q') || '';
+  const [searchQuery, setSearchQuery] = useState(initialQuery);
 
   useEffect(() => {
     async function fetchQuestions() {
@@ -66,6 +70,8 @@ export default function QuestionsPage() {
             <Input
               placeholder="Search questions..."
               className="pl-10"
+              value={searchQuery}
+              onChange={e => setSearchQuery(e.target.value)}
             />
           </div>
 
@@ -82,9 +88,14 @@ export default function QuestionsPage() {
               {loading ? (
                 <div className="text-center py-8 text-muted-foreground">Loading...</div>
               ) : (
-                questions.map((question) => (
-                  <QuestionCard key={question._id} question={question} />
-                ))
+                questions
+                  .filter(q => {
+                    const qStr = `${q.title} ${q.body}`.toLowerCase();
+                    return qStr.includes(searchQuery.toLowerCase());
+                  })
+                  .map((question) => (
+                    <QuestionCard key={question._id} question={question} />
+                  ))
               )}
             </TabsContent>
             

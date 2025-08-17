@@ -26,12 +26,26 @@ export default async function TagPage({ params }: TagPageProps) {
   let tag: any = null
   let questions: any[] = []
   let relatedTags: any[] = []
+  let metrics: any = {
+    usageCount: 0,
+    answeredRate: 0,
+    avgScore: 0,
+    activeUsers: 0,
+    createdAt: null
+  }
   try {
     console.log('Fetching tag details for:', params.slug);  
     const data = await fetchTagWithQuestions(params.slug)
     tag = data.tag
     questions = data.questions || []
     relatedTags = data.relatedTags || [] // used in sidebar
+    metrics = data.metrics || {
+      usageCount: tag.usageCount,
+      answeredRate: tag.answeredRate || 0,
+      avgScore: tag.avgScore || 0,
+      activeUsers: tag.activeUsers || 0,
+      createdAt: tag.createdAt || null
+    }
   } catch (err: any) {
     // fallback UI or error message
     return (
@@ -98,7 +112,7 @@ export default async function TagPage({ params }: TagPageProps) {
                 <div className="flex items-center gap-2">
                   <Hash className="h-4 w-4 text-muted-foreground" />
                   <div>
-                    <div className="text-2xl font-bold">{tag.usageCount.toLocaleString()}</div>
+                    <div className="text-2xl font-bold">{metrics.usageCount?.toLocaleString?.() ?? metrics.usageCount}</div>
                     <div className="text-xs text-muted-foreground">Total Questions</div>
                   </div>
                 </div>
@@ -110,7 +124,7 @@ export default async function TagPage({ params }: TagPageProps) {
                 <div className="flex items-center gap-2">
                   <TrendingUp className="h-4 w-4 text-muted-foreground" />
                   <div>
-                    <div className="text-2xl font-bold">85%</div>
+                    <div className="text-2xl font-bold">{metrics.answeredRate}%</div>
                     <div className="text-xs text-muted-foreground">Answer Rate</div>
                   </div>
                 </div>
@@ -122,7 +136,7 @@ export default async function TagPage({ params }: TagPageProps) {
                 <div className="flex items-center gap-2">
                   <User className="h-4 w-4 text-muted-foreground" />
                   <div>
-                    <div className="text-2xl font-bold">2.1k</div>
+                    <div className="text-2xl font-bold">{metrics.activeUsers?.toLocaleString?.() ?? metrics.activeUsers}</div>
                     <div className="text-xs text-muted-foreground">Active Users</div>
                   </div>
                 </div>
@@ -134,8 +148,8 @@ export default async function TagPage({ params }: TagPageProps) {
                 <div className="flex items-center gap-2">
                   <Calendar className="h-4 w-4 text-muted-foreground" />
                   <div>
-                    <div className="text-2xl font-bold">45</div>
-                    <div className="text-xs text-muted-foreground">This Week</div>
+                    <div className="text-2xl font-bold">{metrics.createdAt ? formatDate(metrics.createdAt) : ''}</div>
+                    <div className="text-xs text-muted-foreground">Created</div>
                   </div>
                 </div>
               </CardContent>
@@ -335,23 +349,23 @@ export default async function TagPage({ params }: TagPageProps) {
               <CardContent className="space-y-3 text-sm">
                 <div className="flex justify-between">
                   <span>Total questions:</span>
-                  <span className="font-medium">{tag.usageCount.toLocaleString()}</span>
+                  <span className="font-medium">{metrics.usageCount?.toLocaleString?.() ?? metrics.usageCount}</span>
                 </div>
                 <div className="flex justify-between">
                   <span>Answered:</span>
-                  <span className="font-medium text-green-600">85%</span>
+                  <span className="font-medium text-green-600">{metrics.answeredRate}%</span>
                 </div>
                 <div className="flex justify-between">
                   <span>Avg. score:</span>
-                  <span className="font-medium">4.2</span>
+                  <span className="font-medium">{metrics.avgScore}</span>
                 </div>
                 <div className="flex justify-between">
                   <span>Active users:</span>
-                  <span className="font-medium">2,134</span>
+                  <span className="font-medium">{metrics.activeUsers?.toLocaleString?.() ?? metrics.activeUsers}</span>
                 </div>
                 <div className="flex justify-between">
                   <span>Created:</span>
-                  <span className="font-medium">{formatDate(tag.createdAt)}</span>
+                  <span className="font-medium">{metrics.createdAt ? formatDate(metrics.createdAt) : ''}</span>
                 </div>
               </CardContent>
             </Card>

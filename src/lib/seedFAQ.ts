@@ -1,0 +1,131 @@
+import dbConnect from '@/lib/db'
+import FAQ from '@/models/FAQ'
+
+const faqCategories = [
+  {
+    category: "Getting Started",
+    questions: [
+      {
+        question: "How do I create an account on TechBlog?",
+        answer: "You can create an account by clicking the 'Sign Up' button in the top right corner. You can register using your email address or sign up with Google/GitHub for faster registration."
+      },
+      {
+        question: "Is TechBlog free to use?",
+        answer: "Yes! TechBlog is completely free to use. You can ask questions, provide answers, vote on content, and participate in the community without any cost."
+      },
+      {
+        question: "How does the reputation system work?",
+        answer: "You earn reputation points when other users upvote your questions and answers. Reputation reflects the trust the community has in you and unlocks additional privileges as you earn more points."
+      },
+      {
+        question: "What makes a good first question?",
+        answer: "A good first question is specific, well-researched, includes relevant code examples, and shows what you've already tried. Make sure to use appropriate tags and follow our question guidelines."
+      }
+    ]
+  },
+  {
+    category: "Asking Questions",
+    questions: [
+      {
+        question: "How do I ask a good question?",
+        answer: "Write a clear, specific title. Include relevant code examples and error messages. Explain what you expected vs. what actually happened. Show what you've tried and use appropriate tags."
+      },
+      {
+        question: "What should I do if my question isn't getting answers?",
+        answer: "Check if your question follows our guidelines, add more details or context, improve formatting, add relevant tags, or consider offering a bounty to attract more attention."
+      },
+      {
+        question: "How many tags should I use?",
+        answer: "Use 1-5 tags that accurately describe your question. Choose the most specific and relevant tags. Avoid using too many general tags or tags unrelated to your question."
+      },
+      {
+        question: "Can I ask homework or assignment questions?",
+        answer: "Yes, but show your work and specific problems you're facing. Don't just post the assignment and ask for the complete solution. Demonstrate your learning effort."
+      }
+    ]
+  },
+  {
+    category: "Community & Moderation",
+    questions: [
+      {
+        question: "What happens if I violate community guidelines?",
+        answer: "Violations may result in warnings, temporary suspensions, or permanent bans depending on severity. We focus on education first and use a progressive enforcement approach."
+      },
+      {
+        question: "How do I report inappropriate content?",
+        answer: "Use the flag button on any post to report spam, harassment, or other violations. Our moderation team reviews all reports and takes appropriate action."
+      },
+      {
+        question: "Can I edit or delete my posts?",
+        answer: "Yes, you can edit your questions and answers. Deletion is possible for your own posts, though heavily upvoted content may be preserved for community benefit."
+      },
+      {
+        question: "What is the voting system for?",
+        answer: "Voting helps surface the best content. Upvote helpful questions and answers, downvote content that's not useful or violates guidelines. Votes also affect user reputation."
+      }
+    ]
+  },
+  {
+    category: "Technical Issues",
+    questions: [
+      {
+        question: "How do I format code in my posts?",
+        answer: "Use backticks (`) for inline code or triple backticks (```) for code blocks. You can also indent with 4 spaces or use the code button in the editor toolbar."
+      },
+      {
+        question: "Why can't I upload images?",
+        answer: "Image uploads require a minimum reputation level to prevent spam. You can use external image hosting services and include links until you reach the required reputation."
+      },
+      {
+        question: "The site is loading slowly. What can I do?",
+        answer: "Try refreshing the page, clearing your browser cache, or checking your internet connection. If problems persist, contact our support team with your browser and location details."
+      },
+      {
+        question: "Can I use TechBlog on mobile devices?",
+        answer: "Yes! TechBlog is fully responsive and works on all mobile devices. We also have a mobile app available for iOS and Android with additional features."
+      }
+    ]
+  },
+  {
+    category: "Account & Privacy",
+    questions: [
+      {
+        question: "How do I change my password?",
+        answer: "Go to your account settings and click 'Change Password'. If you've forgotten your password, use the 'Forgot Password' link on the login page."
+      },
+      {
+        question: "Can I delete my account?",
+        answer: "Yes, you can delete your account from the account settings page. Note that some public contributions may remain but will be anonymized."
+      },
+      {
+        question: "How do you protect my privacy?",
+        answer: "We follow strict privacy guidelines, use encryption for data protection, and never sell personal information. See our Privacy Policy for complete details."
+      },
+      {
+        question: "How do I control email notifications?",
+        answer: "Visit your notification preferences in account settings. You can choose which types of emails to receive and set the frequency of digest emails."
+      }
+    ]
+  }
+]
+
+export default async function seedFAQ() {
+  await dbConnect()
+  await FAQ.deleteMany({})
+  const faqs = []
+  for (const category of faqCategories) {
+    for (const q of category.questions) {
+      faqs.push({
+        question: q.question,
+        answer: q.answer,
+        category: category.category
+      })
+    }
+  }
+  await FAQ.insertMany(faqs)
+  console.log('Seeded FAQ data')
+}
+
+if (require.main === module) {
+  seedFAQ().then(() => process.exit(0))
+}

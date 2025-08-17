@@ -11,6 +11,7 @@ export interface IUser extends Document {
   githubId?: string
   googleId?: string
   emailVerified?: Date
+  badges?: string[]
   createdAt: Date
   updatedAt: Date
 }
@@ -41,6 +42,10 @@ const UserSchema = new Schema<IUser>({
     type: String,
     maxlength: 500,
     default: ''
+  },
+  badges: {
+    type: [String],
+    default: []
   },
   reputation: {
     type: Number,

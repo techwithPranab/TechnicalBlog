@@ -1,11 +1,10 @@
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import './globals.css'
-import { ThemeProvider } from '@/components/providers/theme-provider'
+// import { ThemeProvider } from '@/components/providers/theme-provider'
 import { SessionProvider } from '@/components/providers/session-provider'
 import { Toaster } from '@/components/ui/toaster'
-import { Header } from '@/components/layout/header'
-import { Footer } from '@/components/layout/footer'
+import LayoutShell from '@/components/layout/layout-shell'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -14,6 +13,7 @@ export const metadata: Metadata = {
   description: 'A community-driven Q&A platform for developers to ask questions, share knowledge, and learn together.',
   keywords: ['coding', 'programming', 'questions', 'answers', 'community', 'developers'],
   authors: [{ name: 'TechBlog Team' }],
+  viewport: 'width=device-width, initial-scale=1',
   openGraph: {
     title: 'TechBlog - Q&A Coding Community',
     description: 'A community-driven Q&A platform for developers',
@@ -24,29 +24,19 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children,
-}: {
+}: Readonly<{
   children: React.ReactNode
-}) {
+}>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={inter.className}>
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="system"
-          enableSystem
-          disableTransitionOnChange
-        >
-          <SessionProvider>
-            <div className="min-h-screen flex flex-col">
-              <Header />
-              <main className="flex-1">
-                {children}
-              </main>
-              <Footer />
-            </div>
-            <Toaster />
-          </SessionProvider>
-        </ThemeProvider>
+      <body className={`light ${inter.className}`}>
+        <SessionProvider>
+          {/* Use client LayoutShell for conditional header/footer */}
+          <LayoutShell>
+            {children}
+          </LayoutShell>
+          <Toaster />
+        </SessionProvider>
       </body>
     </html>
   )

@@ -56,6 +56,23 @@
   body {
     @apply bg-background text-foreground;
   }
+  
+  /* Mobile improvements */
+  @media (max-width: 768px) {
+    .container {
+      @apply px-4;
+    }
+    
+    /* Prevent horizontal scroll */
+    html, body {
+      @apply overflow-x-hidden;
+    }
+    
+    /* Better touch targets */
+    button, a {
+      @apply min-h-[44px] min-w-[44px];
+    }
+  }
 }
 
 /* Code block styling */

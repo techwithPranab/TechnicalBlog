@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
@@ -32,6 +32,29 @@ export default function FeedbackPage() {
     anonymous: false
   })
   const [isSubmitted, setIsSubmitted] = useState(false)
+
+  // Community Impact stats
+  const [impactStats, setImpactStats] = useState({
+    feedbackReceived: 0,
+    featuresImplemented: 0,
+    bugsFixed: 0,
+    responseRate: 0
+  })
+
+  // Fetch stats from backend
+  useEffect(() => {
+    fetch('/api/feedback/stats')
+      .then(res => res.ok ? res.json() : Promise.reject(res))
+      .then(data => {
+        setImpactStats({
+          feedbackReceived: data.feedbackReceived || 0,
+          featuresImplemented: data.featuresImplemented || 0,
+          bugsFixed: data.bugsFixed || 0,
+          responseRate: data.responseRate || 0
+        })
+      })
+      .catch(() => {})
+  }, [])
 
   const feedbackTypes = [
     {
@@ -105,20 +128,38 @@ export default function FeedbackPage() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
-    // Handle form submission here
-    console.log('Feedback submitted:', formData)
-    setIsSubmitted(true)
-    setTimeout(() => {
-      setIsSubmitted(false)
-      setFormData({
-        type: '',
-        rating: 0,
-        title: '',
-        description: '',
-        email: '',
-        anonymous: false
+    // Call backend API to submit feedback
+    fetch('/api/feedback', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(formData)
+    })
+      .then(async (res) => {
+        if (!res.ok) {
+          const error = await res.text()
+          throw new Error(error)
+        }
+        return res.json()
       })
-    }, 3000)
+      .then(() => {
+        setIsSubmitted(true)
+        setTimeout(() => {
+          setIsSubmitted(false)
+          setFormData({
+            type: '',
+            rating: 0,
+            title: '',
+            description: '',
+            email: '',
+            anonymous: false
+          })
+        }, 3000)
+      })
+      .catch((err) => {
+        alert('Failed to submit feedback: ' + err.message)
+      })
   }
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
@@ -363,19 +404,19 @@ export default function FeedbackPage() {
               <CardContent className="space-y-3">
                 <div className="flex items-center justify-between">
                   <span className="text-sm">Feedback Received</span>
-                  <span className="font-bold">1,247</span>
+                  <span className="font-bold">{impactStats.feedbackReceived}</span>
                 </div>
                 <div className="flex items-center justify-between">
                   <span className="text-sm">Features Implemented</span>
-                  <span className="font-bold text-green-600">89</span>
+                  <span className="font-bold text-green-600">{impactStats.featuresImplemented}</span>
                 </div>
                 <div className="flex items-center justify-between">
                   <span className="text-sm">Bugs Fixed</span>
-                  <span className="font-bold text-blue-600">156</span>
+                  <span className="font-bold text-blue-600">{impactStats.bugsFixed}</span>
                 </div>
                 <div className="flex items-center justify-between">
                   <span className="text-sm">Response Rate</span>
-                  <span className="font-bold text-purple-600">98%</span>
+                  <span className="font-bold text-purple-600">{impactStats.responseRate}%</span>
                 </div>
               </CardContent>
             </Card>

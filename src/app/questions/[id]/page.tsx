@@ -346,7 +346,7 @@ export default function QuestionDetailPage() {
               </CardHeader>
               <CardContent className="space-y-4">
                 <Tabs defaultValue="write" className="w-full">
-                  <TabsList className="grid w-full grid-cols-2">
+                  <TabsList className="flex flex-col sm:grid sm:grid-cols-2 w-full">
                     <TabsTrigger value="write">
                       <Edit className="h-4 w-4 mr-2" />
                       Write
