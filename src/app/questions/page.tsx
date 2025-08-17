@@ -1,5 +1,6 @@
 "use client"
 import Link from 'next/link'
+import { Suspense } from 'react'
 import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
 import { Card, CardContent, CardHeader } from '@/components/ui/card'
@@ -10,7 +11,7 @@ import { Search, MessageSquare, Eye, Calendar, User, ArrowUp, ArrowDown } from '
 import { useEffect, useState } from 'react'
 import { useSearchParams } from 'next/navigation'
 
-export default function QuestionsPage() {
+function QuestionsContent() {
   const [questions, setQuestions] = useState<any[]>([])
   const [loading, setLoading] = useState(true)
   const [stats, setStats] = useState({ questions: 0, answers: 0, users: 0 })
@@ -22,11 +23,11 @@ export default function QuestionsPage() {
 
   useEffect(() => {
     async function fetchQuestions() {
-      setLoading(true)
+      //setLoading(true)
       const res = await fetch('/api/questions')
       const data = await res.json()
       setQuestions(data)
-      setLoading(false)
+      //setLoading(false)
     }
     async function fetchStats() {
       setStatsLoading(true)
@@ -48,6 +49,7 @@ export default function QuestionsPage() {
     fetchQuestions()
     fetchStats()
   }, [])
+  
   return (
     <div className="container mx-auto py-8">
       <div className="flex flex-col lg:flex-row gap-8">
@@ -180,6 +182,14 @@ export default function QuestionsPage() {
         </div>
       </div>
     </div>
+  )
+}
+
+export default function QuestionsPage() {
+  return (
+    <Suspense fallback={<div className="text-center py-8 text-muted-foreground">Loading...</div>}>
+      <QuestionsContent />
+    </Suspense>
   )
 }
 
