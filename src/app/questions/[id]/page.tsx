@@ -43,11 +43,11 @@ export default function QuestionDetailPage() {
       setLoading(true)
       const qRes = await fetch(`/api/questions/${params.id}`)
       const qData = await qRes.json()
-      console.log('Fetched question:', qData)
       setQuestion(qData)
       const aRes = await fetch(`/api/questions/${params.id}/answers`)
       const aData = await aRes.json()
       console.log('Fetched answers:', aData)
+      console.log('Fetched question:', qData)
       setAnswers(aData)
       setLoading(false)
     }

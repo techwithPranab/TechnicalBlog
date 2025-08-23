@@ -11,6 +11,7 @@ export default function HomePage() {
     answers: 0,
     answeredRate: 0
   })
+  const [popularTags, setPopularTags] = useState<any[]>([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState('')
 
@@ -33,7 +34,19 @@ export default function HomePage() {
         setLoading(false)
       }
     }
+
+    async function fetchPopularTags() {
+      try {
+        const res = await fetch('/api/tags?sort=usage&limit=12')
+        const data = await res.json()
+        setPopularTags(data.tags || [])
+      } catch (err: any) {
+        console.error('Failed to fetch popular tags:', err)
+      }
+    }
+
     fetchStats()
+    fetchPopularTags()
   }, [])
 
   return (
@@ -145,18 +158,29 @@ export default function HomePage() {
         <div className="container mx-auto px-4">
           <h2 className="text-3xl font-bold text-center mb-12">Popular Technologies</h2>
           <div className="flex flex-wrap justify-center gap-4">
-            {[
-              'JavaScript', 'TypeScript', 'React', 'Next.js', 'Node.js', 
-              'Python', 'Java', 'CSS', 'HTML', 'MongoDB', 'PostgreSQL', 'Git'
-            ].map((tag) => (
-              <Link
-                key={tag}
-                href={`/tags/${tag.toLowerCase()}`}
-                className="bg-primary/10 hover:bg-primary/20 text-primary px-4 py-2 rounded-full transition-colors"
-              >
-                {tag}
-              </Link>
-            ))}
+            {popularTags.length > 0 ? (
+              popularTags.map((tag) => (
+                <Link
+                  key={tag._id}
+                  href={`/tags/${tag.slug}`}
+                  className="bg-primary/10 hover:bg-primary/20 text-primary px-4 py-2 rounded-full transition-colors"
+                >
+                  {tag.name}
+                </Link>
+              ))
+            ) : (
+              // Fallback to static tags if backend fails
+              ['JavaScript', 'TypeScript', 'React', 'Next.js', 'Node.js', 
+               'Python', 'Java', 'CSS', 'HTML', 'MongoDB', 'PostgreSQL', 'Git'].map((tag) => (
+                <Link
+                  key={tag}
+                  href={`/tags/${tag.toLowerCase()}`}
+                  className="bg-primary/10 hover:bg-primary/20 text-primary px-4 py-2 rounded-full transition-colors"
+                >
+                  {tag}
+                </Link>
+              ))
+            )}
           </div>
         </div>
       </section>

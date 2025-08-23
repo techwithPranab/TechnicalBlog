@@ -17,6 +17,7 @@ function QuestionsContent() {
   const [stats, setStats] = useState({ questions: 0, answers: 0, users: 0 })
   const [statsLoading, setStatsLoading] = useState(true)
   const [statsError, setStatsError] = useState('')
+  const [popularTags, setPopularTags] = useState<any[]>([])
   const searchParams = useSearchParams();
   const initialQuery = searchParams.get('q') || '';
   const [searchQuery, setSearchQuery] = useState(initialQuery);
@@ -27,7 +28,8 @@ function QuestionsContent() {
       const res = await fetch('/api/questions')
       const data = await res.json()
       setQuestions(data)
-      //setLoading(false)
+      console.log('Fetched questions:', data) ;
+      setLoading(false)
     }
     async function fetchStats() {
       setStatsLoading(true)
@@ -46,8 +48,18 @@ function QuestionsContent() {
         setStatsLoading(false)
       }
     }
+    async function fetchPopularTags() {
+      try {
+        const res = await fetch('/api/tags?sort=usage&limit=6')
+        const data = await res.json()
+        setPopularTags(data.tags || [])
+      } catch (err: any) {
+        console.error('Failed to fetch popular tags:', err)
+      }
+    }
     fetchQuestions()
     fetchStats()
+    fetchPopularTags()
   }, [])
   
   return (
@@ -141,11 +153,20 @@ function QuestionsContent() {
               </CardHeader>
               <CardContent>
                 <div className="flex flex-wrap gap-2">
-                  {['javascript', 'typescript', 'react', 'nextjs', 'nodejs', 'python'].map((tag) => (
-                    <Badge key={tag} variant="secondary" className="cursor-pointer hover:bg-primary hover:text-primary-foreground">
-                      {tag}
-                    </Badge>
-                  ))}
+                  {popularTags.length > 0 ? (
+                    popularTags.map((tag) => (
+                      <Badge key={tag._id} variant="secondary" className="cursor-pointer hover:bg-primary hover:text-primary-foreground">
+                        {tag.name}
+                      </Badge>
+                    ))
+                  ) : (
+                    // Fallback to static tags
+                    ['javascript', 'typescript', 'react', 'nextjs', 'nodejs', 'python'].map((tag) => (
+                      <Badge key={tag} variant="secondary" className="cursor-pointer hover:bg-primary hover:text-primary-foreground">
+                        {tag}
+                      </Badge>
+                    ))
+                  )}
                 </div>
               </CardContent>
             </Card>

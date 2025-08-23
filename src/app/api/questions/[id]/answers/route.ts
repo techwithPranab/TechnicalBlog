@@ -33,8 +33,12 @@ export async function POST(req: Request, { params }: { params: { id: string } })
 // GET /api/questions/[id]/answers
 export async function GET(req: Request, { params }: { params: { id: string } }) {
   await dbConnect()
+  const questionId = params?.id
+  if (!questionId || questionId === 'undefined') {
+    return NextResponse.json([], { status: 200 })
+  }
   try {
-    const answers = await Answer.find({ question: params.id })
+    const answers = await Answer.find({ question: questionId })
       .populate({
         path: 'author',
         select: 'name avatar reputation',

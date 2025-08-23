@@ -44,7 +44,7 @@ export async function GET(req: Request) {
     const tags = await Tag.find(query)
       .sort(sortOptions)
       .skip(skip)
-      .limit(limit)
+      //.limit(limit)
 
     const total = await Tag.countDocuments(query)
 

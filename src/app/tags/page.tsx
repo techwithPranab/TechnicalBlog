@@ -19,6 +19,7 @@ export default function TagsPage() {
       try {
         const res = await fetch(`/api/tags?search=${encodeURIComponent(search)}`)
         const data = await res.json()
+        console.error('Fetched tags:', data);
         setTags(data.tags || [])
       } catch (err: any) {
         setError(err?.message || 'Failed to fetch tags')

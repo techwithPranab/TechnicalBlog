@@ -1,0 +1,62 @@
+[
+  {
+    "title": "How to ask a good question",
+    "content": "<h2>Writing Effective Questions</h2>\n<p>A well-written question is more likely to get helpful answers. Here are the key elements of a good question:</p>\n<h3>1. Clear and Specific Title</h3>\n<p>Your title should be specific and describe your problem concisely. Avoid vague titles like 'Help me' or 'This doesn't work'.</p>\n<ul><li><strong>Good:</strong> 'How to iterate over a HashMap in Java 8?'</li><li><strong>Bad:</strong> 'Java problem help needed'</li></ul>\n<h3>2. Provide Context</h3>\n<p>Explain what you're trying to achieve and what you've already tried. This helps others understand your situation better.</p>\n<h3>3. Include Code Examples</h3>\n<p>If your question involves code, provide a minimal, complete, and verifiable example. This makes it easier for others to understand and reproduce your issue.</p>\n<h3>4. Show Your Research</h3>\n<p>Mention what you've already researched or attempted. This shows effort and prevents duplicate suggestions.</p>\n<h3>5. Use Proper Formatting</h3>\n<p>Use code blocks, bullet points, and proper formatting to make your question easy to read and understand.</p>\n<h3>6. Be Respectful</h3>\n<p>Remember that people are volunteering their time to help you. Be polite and grateful for any assistance you receive.</p>",
+    "category": "getting-started",
+    "slug": "how-to-ask-good-question",
+    "tags": ["questions", "getting-started", "best-practices"],
+    "author": "TechBlog Team",
+    "views": 2150,
+    "published": true
+  },
+  {
+    "title": "Understanding the reputation system",
+    "content": "<h2>How Reputation Works</h2>\n<p>Reputation is a measure of how much the community trusts you. It's earned by posting quality questions and answers that other community members find helpful.</p>\n<h3>Earning Reputation</h3>\n<ul><li><strong>+15</strong> - Your answer is voted up</li><li><strong>+10</strong> - Your question is voted up</li><li><strong>+15</strong> - Your answer is accepted</li><li><strong>+2</strong> - You accept an answer to your question</li></ul>\n<h3>Losing Reputation</h3>\n<ul><li><strong>-2</strong> - Your answer is voted down</li><li><strong>-2</strong> - Your question is voted down</li><li><strong>-1</strong> - You vote down an answer</li></ul>\n<h3>Reputation Privileges</h3>\n<p>As you earn more reputation, you unlock new privileges:</p>\n<ul><li><strong>15 rep:</strong> Vote up</li><li><strong>50 rep:</strong> Comment everywhere</li><li><strong>125 rep:</strong> Vote down</li><li><strong>500 rep:</strong> Access review queues</li><li><strong>1000 rep:</strong> See vote counts</li></ul>\n<h3>Daily Limits</h3>\n<p>There are daily limits on how much reputation you can gain from votes to prevent gaming the system:</p>\n<ul><li>Maximum 200 reputation from upvotes per day</li><li>Accepted answers and bounties don't count toward this limit</li></ul>",
+    "category": "getting-started",
+    "slug": "understanding-reputation-system",
+    "tags": ["reputation", "voting", "privileges"],
+    "author": "TechBlog Team",
+    "views": 1890,
+    "published": true
+  },
+  {
+    "title": "Formatting code in questions and answers",
+    "content": "<h2>Code Formatting Guide</h2>\n<p>Proper code formatting makes your questions and answers much easier to read and understand. Here's how to format code effectively on TechBlog.</p>\n<h3>Inline Code</h3>\n<p>For short snippets or variable names, use backticks:</p>\n<p><code>`console.log()`</code> renders as <code>console.log()</code></p>\n<h3>Code Blocks</h3>\n<p>For longer code snippets, use triple backticks with language specification:</p>\n<pre><code>```javascript\nfunction greet(name) {\n  console.log(`Hello, ${name}!`);\n}\n```</code></pre>\n<h3>Supported Languages</h3>\n<p>TechBlog supports syntax highlighting for many languages:</p>\n<ul><li>javascript, typescript, jsx, tsx</li><li>python, java, c, cpp, csharp</li><li>html, css, scss, less</li><li>sql, json, xml, yaml</li><li>bash, shell, powershell</li><li>And many more...</li></ul>\n<h3>Best Practices</h3>\n<ul><li>Always specify the language for syntax highlighting</li><li>Remove unnecessary whitespace and comments</li><li>Include only relevant code - create minimal examples</li><li>Use consistent indentation (2 or 4 spaces)</li><li>Add comments to explain complex logic</li></ul>\n<h3>Example Output</h3>\n<p>Here's how properly formatted code looks:</p>\n<pre><code>// Calculate factorial recursively\nfunction factorial(n) {\n  if (n <= 1) return 1;\n  return n * factorial(n - 1);\n}\n\nconsole.log(factorial(5)); // Output: 120</code></pre>",
+    "category": "technical",
+    "slug": "formatting-code-questions-answers",
+    "tags": ["formatting", "markdown", "code", "syntax-highlighting"],
+    "author": "TechBlog Team",
+    "views": 1675,
+    "published": true
+  },
+  {
+    "title": "Community guidelines and code of conduct",
+    "content": "<h2>Community Guidelines</h2>\n<p>TechBlog is a community built on respect, learning, and helping each other grow. These guidelines help maintain a positive environment for everyone.</p>\n<h3>Be Respectful</h3>\n<ul><li>Treat all community members with kindness and respect</li><li>Avoid personal attacks, harassment, or discriminatory language</li><li>Remember there's a real person behind every username</li><li>Be patient with beginners - everyone was new once</li></ul>\n<h3>Be Constructive</h3>\n<ul><li>Provide helpful, actionable feedback</li><li>Explain your reasoning when suggesting changes</li><li>Focus on the content, not the person</li><li>If you disagree, explain why respectfully</li></ul>\n<h3>Be Authentic</h3>\n<ul><li>Only post content you have the right to share</li><li>Give credit where credit is due</li><li>Don't plagiarize or copy without attribution</li><li>Be honest about your experience level</li></ul>\n<h3>Stay On Topic</h3>\n<ul><li>Keep discussions relevant to programming and technology</li><li>Use appropriate tags and categories</li><li>Avoid off-topic discussions in comments</li><li>Search before posting to avoid duplicates</li></ul>\n<h3>Quality Standards</h3>\n<ul><li>Write clear, well-formatted questions and answers</li><li>Provide sufficient detail and context</li><li>Use proper grammar and spelling</li><li>Include relevant code examples</li></ul>\n<h3>Consequences</h3>\n<p>Violations of these guidelines may result in:</p>\n<ul><li>Content removal or editing</li><li>Temporary or permanent account suspension</li><li>Loss of privileges or reputation</li><li>Reporting to appropriate authorities (in severe cases)</li></ul>\n<h3>Reporting Issues</h3>\n<p>If you encounter content that violates these guidelines:</p>\n<ul><li>Use the report button on the specific content</li><li>Contact moderators through the contact form</li><li>Provide specific details about the violation</li><li>Don't engage in public arguments about moderation</li></ul>",
+    "category": "community",
+    "slug": "community-guidelines-code-conduct",
+    "tags": ["guidelines", "community", "conduct", "rules"],
+    "author": "TechBlog Team",
+    "views": 1456,
+    "published": true
+  },
+  {
+    "title": "Account security and two-factor authentication",
+    "content": "<h2>Securing Your Account</h2>\n<p>Protecting your TechBlog account is crucial for maintaining your reputation and ensuring your content remains secure.</p>\n<h3>Strong Passwords</h3>\n<p>Your first line of defense is a strong, unique password:</p>\n<ul><li>Use at least 12 characters</li><li>Include uppercase and lowercase letters, numbers, and symbols</li><li>Avoid common words, personal information, or patterns</li><li>Never reuse passwords from other sites</li><li>Consider using a password manager</li></ul>\n<h3>Two-Factor Authentication (2FA)</h3>\n<p>Enable 2FA to add an extra layer of security to your account:</p>\n<h4>Setting Up 2FA</h4>\n<ol><li>Go to your Profile Settings</li><li>Click on the 'Security' tab</li><li>Select 'Enable Two-Factor Authentication'</li><li>Choose your preferred method (authenticator app or SMS)</li><li>Follow the setup instructions</li><li>Save your backup codes in a secure location</li></ol>\n<h4>Recommended Authenticator Apps</h4>\n<ul><li>Google Authenticator</li><li>Microsoft Authenticator</li><li>Authy</li><li>1Password</li><li>Bitwarden</li></ul>\n<h3>Recovery Options</h3>\n<p>Set up recovery options in case you lose access:</p>\n<ul><li>Add a recovery email address</li><li>Keep backup codes in a secure location</li><li>Consider setting up multiple 2FA methods</li><li>Keep your contact information up to date</li></ul>\n<h3>Account Monitoring</h3>\n<p>Regularly monitor your account for suspicious activity:</p>\n<ul><li>Review your login history in account settings</li><li>Check for unexpected changes to your profile</li><li>Monitor your reputation and activity</li><li>Report any suspicious activity immediately</li></ul>\n<h3>If Your Account is Compromised</h3>\n<p>If you suspect unauthorized access:</p>\n<ol><li>Change your password immediately</li><li>Review and update your security settings</li><li>Check your profile and content for changes</li><li>Contact support through the help center</li><li>Consider enabling additional security measures</li></ol>",
+    "category": "account",
+    "slug": "account-security-two-factor-authentication",
+    "tags": ["security", "2fa", "password", "account"],
+    "author": "TechBlog Team",
+    "views": 892,
+    "published": true
+  },
+  {
+    "title": "Mobile app troubleshooting",
+    "content": "<h2>Troubleshooting the TechBlog Mobile App</h2>\n<p>Having issues with the TechBlog mobile app? Here are common problems and their solutions.</p>\n<h3>App Won't Load or Crashes</h3>\n<h4>Try these steps in order:</h4>\n<ol><li><strong>Force close and restart the app</strong><ul><li>iOS: Double-tap home button, swipe up on TechBlog</li><li>Android: Use recent apps button, swipe away TechBlog</li></ul></li><li><strong>Restart your device</strong></li><li><strong>Check your internet connection</strong></li><li><strong>Update the app</strong><ul><li>Check App Store or Google Play for updates</li></ul></li><li><strong>Clear app cache (Android only)</strong><ul><li>Settings > Apps > TechBlog > Storage > Clear Cache</li></ul></li><li><strong>Reinstall the app</strong></li></ol>\n<h3>Login Issues</h3>\n<p>Can't sign in to your account?</p>\n<ul><li>Verify your username and password</li><li>Check if caps lock is on</li><li>Try logging in through the website</li><li>Reset your password if needed</li><li>Ensure you're using the correct authentication method</li></ul>\n<h3>Sync Issues</h3>\n<p>Content not syncing between devices?</p>\n<ul><li>Check your internet connection</li><li>Sign out and back in to your account</li><li>Force refresh by pulling down on lists</li><li>Check if you're logged into the same account</li></ul>\n<h3>Performance Issues</h3>\n<p>App running slowly?</p>\n<ul><li>Close other apps running in the background</li><li>Free up storage space on your device</li><li>Check for app updates</li><li>Restart your device</li><li>Switch to a faster internet connection</li></ul>\n<h3>Notification Issues</h3>\n<p>Not receiving notifications?</p>\n<ol><li><strong>Check app notification settings</strong><ul><li>iOS: Settings > Notifications > TechBlog</li><li>Android: Settings > Apps > TechBlog > Notifications</li></ul></li><li><strong>Check in-app notification preferences</strong></li><li><strong>Ensure 'Do Not Disturb' is off</strong></li><li><strong>Check your device's notification settings</strong></li></ol>\n<h3>System Requirements</h3>\n<p><strong>iOS:</strong> iOS 13.0 or later</p>\n<p><strong>Android:</strong> Android 6.0 (API level 23) or later</p>\n<h3>Still Having Issues?</h3>\n<p>If none of these solutions work:</p>\n<ul><li>Contact our support team with specific details</li><li>Include your device model and OS version</li><li>Describe the exact steps that lead to the problem</li><li>Include any error messages you see</li></ul>",
+    "category": "troubleshooting",
+    "slug": "mobile-app-troubleshooting",
+    "tags": ["mobile", "app", "troubleshooting", "bugs"],
+    "author": "TechBlog Team",
+    "views": 287,
+    "published": true
+  }
+]

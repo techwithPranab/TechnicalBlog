@@ -44,11 +44,6 @@ export function Footer() {
                 </Link>
               </li>
               <li>
-                <Link href="/users" className="text-muted-foreground hover:text-foreground">
-                  Users
-                </Link>
-              </li>
-              <li>
                 <Link href="/questions/ask" className="text-muted-foreground hover:text-foreground">
                   Ask Question
                 </Link>

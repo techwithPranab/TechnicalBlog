@@ -82,7 +82,7 @@ export default function AskQuestionPage() {
       })
 
       const result = await response.json()
-
+      console.log('Create question response:', result)
       if (!response.ok) {
         throw new Error(result.message || 'Failed to create question')
       }
@@ -92,7 +92,7 @@ export default function AskQuestionPage() {
         description: 'Question created successfully!',
       })
 
-      router.push(`/questions/${result.id}`)
+      router.push(`/questions/${result._id}`)
     } catch (error: any) {
       toast({
         title: 'Error',
